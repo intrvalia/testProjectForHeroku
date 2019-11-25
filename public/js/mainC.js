@@ -1,6 +1,6 @@
 window.onload = function(){
 console.log("we have launched client script");
-let client = io.connect('http://localhost:4200');
+let client = io.connect('https://test-cart351.herokuapp.com:5000');
 let shapesAddedToDrawingBoard = [];
 
 
@@ -122,7 +122,7 @@ client.on('connect', function(data) {
 client.on('err', function (data){
   console.log("error no connection");
   client.disconnect();
-  
+
 
 })
 
