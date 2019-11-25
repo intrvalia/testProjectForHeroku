@@ -1,0 +1,68 @@
+
+body{
+
+}
+#paper{
+position:relative;
+width:100vh;
+height:100vh;
+background:rgba(246,246,246,1);
+}
+.mButton{
+  background:rgba(255,0,0,.25);
+  width:50px;
+  height:50px;
+}
+.gButton{
+  background:rgba(255,0,0,.75);
+  width:50px;
+  height:50px;
+}
+.flex-container {
+  display: flex;
+}
+.col {
+  background-color: #f1f1f1;
+}
+.button-group{
+  padding:10px;
+  background:#eeeeee;
+}
+.butt{
+  margin:5%;
+}
+.rectA{
+  width:25px;
+  height:25px;
+  background:red;
+  position:absolute;
+  left:0px;
+  top:0px;
+}
+
+.rectB{
+  width:15px;
+  height:15px;
+  background:orange;
+  position:absolute;
+  left:0px;
+  top:0px;
+}
+
+.rectC{
+  width:10px;
+  height:10px;
+  background:blue;
+  position:absolute;
+  left:0px;
+  top:0px;
+}
+
+.rectD{
+  width:18px;
+  height:10px;
+  background:grey;
+  position:absolute;
+  left:0px;
+  top:0px;
+}
