@@ -1,6 +1,7 @@
 window.onload = function(){
 console.log("we have launched client script");
-let client = io.connect('https://test-cart351.herokuapp.com:5000');
+//let client = io.connect('https://test-cart351.herokuapp.com:5000');
+let client = io();
 let shapesAddedToDrawingBoard = [];
 
 
