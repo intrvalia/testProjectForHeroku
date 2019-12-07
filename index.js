@@ -1,11 +1,28 @@
 //import the Express library
 let connectionsLimit = 3
 let express = require('express');
-const portNumber= process.env.PORT || 5000;
+const portNumber= process.env.PORT || 4200;
 let app = express(); //make an insatnce of express
-let httpServer = require('http').createServer(app);  // create a server (using the Express framework object)
+//let httpServer = require('http').createServer(app);  // create a server (using the Express framework object)
 // make server listen for incoming messages
-httpServer.listen(portNumber, function(){
+//httpServer.listen(portNumber, function(){
+  //console.log('listening on port:: '+portNumber);
+//});
+const https = require('https');
+const fs = require('fs');
+
+
+
+var key = fs.readFileSync(__dirname + '/certs/selfsigned.key');
+var cert = fs.readFileSync(__dirname + '/certs/selfsigned.crt');
+var options = {
+  key: key,
+  cert: cert
+};
+
+let httpsServer  =   https.createServer(options, app);
+
+httpsServer.listen(portNumber, function(){
   console.log('listening on port:: '+portNumber);
 });
 
@@ -19,7 +36,7 @@ app.get('/', function(req, res) {
 });
 
 // declare io which mounts to our httpServer object (runs ontop ... )
-let io = require('socket.io')(httpServer);
+let io = require('socket.io')(httpsServer);
 // for the client...
 app.use(express.static(__dirname + '/node_modules'));
 

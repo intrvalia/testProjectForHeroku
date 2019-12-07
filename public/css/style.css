@@ -66,3 +66,26 @@ background:rgba(246,246,246,1);
   left:0px;
   top:0px;
 }
+
+
+.rectE{
+  width:20px;
+  height:20px;
+  background:orange;
+  position:absolute;
+  left:0px;
+  top:10px;
+    z-index:102;
+}
+
+.ell{
+  width:20px;
+  height:20px;
+  background:orange;
+  background-color: #ff0000;
+  border-radius: 50%;
+  position:absolute;
+  z-index:100;
+  left:250px;
+  top:250px;
+}

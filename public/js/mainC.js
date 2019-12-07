@@ -1,8 +1,160 @@
 window.onload = function(){
 console.log("we have launched client script");
 //let client = io.connect('https://test-cart351.herokuapp.com:5000');
-let client = io();
+//let client = io();
 let shapesAddedToDrawingBoard = [];
+
+  let diffVector =null;
+
+
+/*** DRAGGING FUNCTIONS ***/
+let diffX = 0, diffY = 0, previousX = 0, previousY = 0;
+let onBox = false;
+
+/* function to be triggered when mouse is down */
+let handleDown = function (event)
+{
+event.preventDefault();
+//if we are down & have not been down then update the prevX,Y vars
+// otherwise they will contain mouse positions from a while back
+if(onBox ==false) {
+  previousX = event.pageX;
+  previousY = event.pageY;
+}
+console.log("down");
+//make boolean true
+onBox =true;
+
+};
+/* function to be triggered when mouse is up */
+let handleUp = function (event){
+event.preventDefault();
+console.log("up");
+//make boolean true
+  onBox =false;
+
+  let centerCirclePos = new p5.Vector(250,250);
+
+  let theElement = document.getElementById("testDragger");
+//  console.log(theElement);
+  // let rect = theElement.getBoundingClientRect();
+  //console.log(rect);
+//  let shapePos = new p5.Vector(rect.x,rect.y);
+
+
+let x = $(theElement).css("left");
+let y = $(theElement).css("top");
+
+//  console.log(x);
+let xPos = parseInt(x.substr(0,x.length-2));
+let yPos = parseInt(y.substr(0,y.length-2));
+
+let shapePos = new p5.Vector(xPos,yPos);
+ diffVector = p5.Vector.sub(centerCirclePos,shapePos);
+ diffVector.normalize();
+ diffVector.mult(2.5);
+requestAnimationFrame(go);
+
+ // we will now move the object in that direction ...
+
+//  console.log(diffVector);
+// if(diffVector.y<0){
+//              //dataToInsert["directiony"] = -1+diffVector.y;
+//              };
+//              if(diffVector.y>0){
+//             // dataToInsert["directiony"] = 1+diffVector.y;
+//              };
+//              if(diffVector.x<0){
+//             // dataToInsert["directionx"] = -1+diffVector.x;
+//              };
+//              if(diffVector.x>0){
+//              //dataToInsert["directionx"] = 1+diffVector.x;
+//              };
+//
+//
+//              diffVector.x*=10;
+//              diffVector.y*=10;
+//
+//
+//
+//              console.log(diffVector);
+};
+
+
+function go(){
+  console.log("in go");
+
+  let theElement = document.getElementById("testDragger");
+//  console.log(theElement);
+  // let rect = theElement.getBoundingClientRect();
+  //console.log(rect);
+//  let shapePos = new p5.Vector(rect.x,rect.y);
+
+
+let x = $(theElement).css("left");
+let y = $(theElement).css("top");
+
+//  console.log(x);
+let xPos = parseInt(x.substr(0,x.length-2));
+let yPos = parseInt(y.substr(0,y.length-2));
+
+let shapePos = new p5.Vector(xPos,yPos);
+
+ shapePos.add(diffVector);
+ ///console.log(shapePos)
+
+ let newPosX = shapePos.x.toString()+"px";
+ let newPosY = shapePos.y.toString()+"px";
+
+ $(theElement).css({"left":newPosX,"top":newPosY});
+
+requestAnimationFrame(go);
+}
+/* function to be triggered for move */
+let handleMove = function (event)
+{
+event.preventDefault();
+if(onBox ==true)
+{
+  console.log("move");
+
+  // who is moving??
+  let theElement = document.getElementById(event.target.id);
+  //console.log(theElement);
+  // calculate difference between previous mouseX and current mouseX pos
+  let diffX = event.pageX-previousX;
+  // calculate difference between previous mouseY and current mouseY pos
+  let diffY =  event.pageY-previousY;
+  //store in previous the current mouse pos
+  previousX = event.pageX;
+  previousY = event.pageY;
+  // set the element's new position:
+/*https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect*/
+ let rect = theElement.getBoundingClientRect();
+ //console.log(rect);
+// set the new left/top to the old+diff...
+ theElement.style.left = ((rect.left+diffX)+"px");
+ theElement.style.top = ((rect.top+diffY)+"px");
+}
+
+};
+
+/** TEST FOR DRAGGING ***/
+let boxDrag = document.getElementById("testDragger");
+boxDrag.addEventListener('mousedown', handleDown);
+boxDrag.addEventListener('touchstart', handleDown);
+
+
+
+
+window.addEventListener('mouseup', handleUp);
+window.addEventListener('touchend', handleUp);
+//window.addEventListener('mousemove', handleMove);
+$(boxDrag).on('move',handleMove);
+
+
+
+
 
 
 function Shape(e){
