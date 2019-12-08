@@ -52,7 +52,7 @@ let yPos = parseInt(y.substr(0,y.length-2));
 let shapePos = new p5.Vector(xPos,yPos);
  diffVector = p5.Vector.sub(centerCirclePos,shapePos);
  diffVector.normalize();
- diffVector.mult(2.5);
+ diffVector.mult(2.0);
 requestAnimationFrame(go);
 
  // we will now move the object in that direction ...
@@ -85,6 +85,7 @@ function go(){
   console.log("in go");
 
   let theElement = document.getElementById("testDragger");
+    let centerCirclePos = new p5.Vector(250,250);
 //  console.log(theElement);
   // let rect = theElement.getBoundingClientRect();
   //console.log(rect);
@@ -100,7 +101,19 @@ let yPos = parseInt(y.substr(0,y.length-2));
 
 let shapePos = new p5.Vector(xPos,yPos);
 
+// diffVector = p5.Vector.sub(centerCirclePos,shapePos);
+ //diffVector.normalize();
+ //diffVector.mult(2.0);
+
  shapePos.add(diffVector);
+
+ if(shapePos.x<0 || shapePos.x>500){
+   diffVector.x*=-1;
+ }
+
+ if(shapePos.y<0 || shapePos.y>500){
+   diffVector.y*=-1;
+ }
  ///console.log(shapePos)
 
  let newPosX = shapePos.x.toString()+"px";
@@ -147,8 +160,8 @@ boxDrag.addEventListener('touchstart', handleDown);
 
 
 
-window.addEventListener('mouseup', handleUp);
-window.addEventListener('touchend', handleUp);
+boxDrag.addEventListener('mouseup', handleUp);
+boxDrag.addEventListener('touchend', handleUp);
 //window.addEventListener('mousemove', handleMove);
 $(boxDrag).on('move',handleMove);
 
