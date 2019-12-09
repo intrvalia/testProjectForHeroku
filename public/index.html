@@ -1,127 +1,39 @@
+
+<!DOCTYPE html>
 <html>
-<head>
-<title>Mouse Events</title>
-<style>
-body{
-  background:black;
-  margin:0;
-  padding:0;
-}
-#rowOfBoxes {
-    height: 116px;
-    width: 812px;
-    padding-right: 10px;
-    padding-top: 50px;
-    margin: auto;
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;}
+    <head>
+        <meta charset="utf-8" />
+        <title>Test Node with socketse</title>
 
-.box {
-    width: 100px;
-    height: 100px;
-    position:absolute;}
+        <!-- The stylesheets -->
+        <link rel="stylesheet" href="css/style.css" />
+      <script src="js/p5.min.js" > </script>
+       <!-- <script src="/socket.io/socket.io.js"></script> -->
 
-#c {
-    background-color: #3e181b;
-    border: 3px solid #db1d2d;
-    left:50px; top:50px;}
+         <script src="js/jquery-3.4.1.js" > </script>
+         <script src = "js/jquery.event.move.js" ></script>
+        <script src="js/mainC.js" > </script>
 
-    #e {
-        background-color: #422018;
-        border: 3px solid #f0421c;
-        left:200px; top:50px;}
-</style>
-</head>
-<body>
+    </head>
 
-           <script src="js/jquery-3.4.1.js" > </script>
-           <script src = "js/jquery.event.move.js" ></script>
-<script>
+    <body>
+      <h2> test </h2>
+        <div id = "testDragger" class = "rectE"> </div>
+          <div id = "center" class = "ell"> </div>
+      <div class="flex-container">
+        <!-- <div class = "col">
+        <!--
+        <div id ="paper"></div>
+        </div><!--col -->
+        <div class = "col">
+          <div class = "button-group">
+        <div id = "a" class = "butt mButton"> </div>
+        <div id = "b" class = "butt gButton"> </div>
+        <div id = "c" class = "butt mButton"> </div>
+        <div id = "d" class = "butt gButton"> </div>
+        </div><!--button group -->
+        </div><!--col -->
+      </div><!-- flex-con -->
 
-window.onload = function()
-{
-  let diffX = 0, diffY = 0, previousX = 0, previousY = 0;
-  let onBox = false;
-
-/* function to be triggered when mouse is down */
-let handleDown = function (event)
-{
-  event.preventDefault();
-    event.stopPropagation();
-  //if we are down & have not been down then update the prevX,Y vars
-  // otherwise they will contain mouse positions from a while back
-  if(onBox ==false) {
-  previousX = event.pageX;
-  previousY = event.pageY;
-}
-  console.log("down");
-  //make boolean true
-  onBox =true;
-
-};
- /* function to be triggered when mouse is up */
-let handleUp = function (event){
-  event.preventDefault();
-    event.stopPropagation();
-  console.log("up");
-  //make boolean true
-    onBox =false;
- };
- /* function to be triggered for move */
-let handleMove = function (event)
-{
-
-  event.preventDefault();
-    event.stopPropagation();
-  if(onBox ==true)
-  {
-    console.log("move");
-    // who is moving??
-    let theElement = document.getElementById("c");
-    // calculate difference between previous mouseX and current mouseX pos
-    let diffX = event.pageX-previousX;
-    // calculate difference between previous mouseY and current mouseY pos
-    let diffY =  event.pageY-previousY;
-    //store in previous the current mouse pos
-    previousX = event.pageX;
-    previousY = event.pageY;
-    // set the element's new position:
-  /*https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect*/
-   let rect = theElement.getBoundingClientRect();
-  // set the new left/top to the old+diff...
-   theElement.style.left = ((rect.left+diffX)+"px");
-   theElement.style.top = ((rect.top+diffY)+"px");
- }
-
-};
-
-let boxC = document.getElementById("c");
-boxC.addEventListener('mousedown', handleDown);
-boxC.addEventListener('touchstart', handleDown,false);
-
-//let boxE = document.getElementById("e");
-//boxE.addEventListener('mousedown', handleDown);
-//boxE.addEventListener('touchstart', handleDown);
-
-boxC.addEventListener('mouseup', handleUp);
-boxC.addEventListener('touchend',handleUp,false);
-
-
-window.addEventListener('mousemove', handleMove);
-boxC.addEventListener('touchmove',handleMove,false);
-
-
-//window.addEventListener('touchend', handleUp);
-//window.addEventListener('touchmove', handleMove);
-
-
-//$(boxC).on('move',handleMove);
-
-
- }
-
-</script>
-<div id="c" class="box"></div>
-<div id="e" class="box"></div>
-</body>
+  </body>
 </html>

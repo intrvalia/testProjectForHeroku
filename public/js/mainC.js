@@ -18,8 +18,8 @@ event.preventDefault();
 //if we are down & have not been down then update the prevX,Y vars
 // otherwise they will contain mouse positions from a while back
 if(onBox ==false) {
-  previousX = event.clientX;
-  previousY = event.clientY;
+  previousX = event.pageX;
+  previousY = event.pageY;
 }
 console.log("down");
 //make boolean true
@@ -28,7 +28,8 @@ onBox =true;
 };
 /* function to be triggered when mouse is up */
 let handleUp = function (event){
-event.preventDefault();
+  event.preventDefault();
+  event.stopPropagation();
 console.log("up");
 //make boolean true
   onBox =false;
@@ -53,7 +54,7 @@ let shapePos = new p5.Vector(xPos,yPos);
  diffVector = p5.Vector.sub(centerCirclePos,shapePos);
  diffVector.normalize();
  diffVector.mult(2.0);
-requestAnimationFrame(go);
+//requestAnimationFrame(go);
 
  // we will now move the object in that direction ...
 
@@ -127,7 +128,8 @@ requestAnimationFrame(go);
 let handleMove = function (event)
 {
 
-event.preventDefault();
+  event.preventDefault();
+  event.stopPropagation();
 if(onBox ==true)
 {
   console.log("move");
@@ -135,14 +137,14 @@ if(onBox ==true)
   // who is moving??
   let theElement = document.getElementById("testDragger");
   //if(event.target.id ==="testDragger"){
-  console.log(theElement);
+  //console.log(theElement);
   // calculate difference between previous mouseX and current mouseX pos
-  let diffX = event.clientX-previousX;
+  let diffX = event.pageX-previousX;
   // calculate difference between previous mouseY and current mouseY pos
-  let diffY =  event.clientY-previousY;
+  let diffY =  event.pageY-previousY;
   //store in previous the current mouse pos
-  previousX = event.clientX;
-  previousY = event.clientY;
+  previousX = event.pageX;
+  previousY = event.pageY;
   // set the element's new position:
 /*https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect*/
  let rect = theElement.getBoundingClientRect();
@@ -158,15 +160,16 @@ if(onBox ==true)
 /** TEST FOR DRAGGING ***/
 let boxDrag = document.getElementById("testDragger");
 boxDrag.addEventListener('mousedown', handleDown);
-boxDrag.addEventListener('touchstart', handleDown);
+boxDrag.addEventListener('touchstart', handleDown,false);
 
 
 
 
-window.addEventListener('mouseup', handleUp);
-window.addEventListener('touchend', handleUp);
+boxDrag.addEventListener('mouseup', handleUp);
+boxDrag.addEventListener('touchend', handleUp);
 
 window.addEventListener('mousemove', handleMove);
+boxDrag.addEventListener('touchmove',handleMove,false);
 //$(boxDrag).on('move',handleMove);
 
 //boxDrag.addEventListener("touchmove", handleMove, false);
