@@ -46,6 +46,8 @@ window.onload = function()
 /* function to be triggered when mouse is down */
 let handleDown = function (event)
 {
+  event.preventDefault();
+    event.stopPropagation();
   //if we are down & have not been down then update the prevX,Y vars
   // otherwise they will contain mouse positions from a while back
   if(onBox ==false) {
@@ -59,6 +61,8 @@ let handleDown = function (event)
 };
  /* function to be triggered when mouse is up */
 let handleUp = function (event){
+  event.preventDefault();
+    event.stopPropagation();
   console.log("up");
   //make boolean true
     onBox =false;
@@ -66,6 +70,9 @@ let handleUp = function (event){
  /* function to be triggered for move */
 let handleMove = function (event)
 {
+
+  event.preventDefault();
+    event.stopPropagation();
   if(onBox ==true)
   {
     console.log("move");
@@ -90,18 +97,18 @@ let handleMove = function (event)
 
 let boxC = document.getElementById("c");
 boxC.addEventListener('mousedown', handleDown);
-boxC.addEventListener('touchstart', handleDown);
+boxC.addEventListener('touchstart', handleDown,false);
 
 //let boxE = document.getElementById("e");
 //boxE.addEventListener('mousedown', handleDown);
 //boxE.addEventListener('touchstart', handleDown);
 
 boxC.addEventListener('mouseup', handleUp);
-$(boxC).bind('touchend',handleUp);
+boxC.addEventListener('touchend',handleUp,false);
 
 
 window.addEventListener('mousemove', handleMove);
-$(boxC).bind('touchmove',handleMove);
+boxC.addEventListener('touchmove',handleMove,false);
 
 
 //window.addEventListener('touchend', handleUp);
