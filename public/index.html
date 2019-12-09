@@ -33,7 +33,11 @@ body{
 </style>
 </head>
 <body>
+
+           <script src="js/jquery-3.4.1.js" > </script>
+           <script src = "js/jquery.event.move.js" ></script>
 <script>
+
 window.onload = function()
 {
   let diffX = 0, diffY = 0, previousX = 0, previousY = 0;
@@ -66,7 +70,7 @@ let handleMove = function (event)
   {
     console.log("move");
     // who is moving??
-    let theElement = document.getElementById(event.target.id);
+    let theElement = document.getElementById("c");
     // calculate difference between previous mouseX and current mouseX pos
     let diffX = event.clientX-previousX;
     // calculate difference between previous mouseY and current mouseY pos
@@ -88,15 +92,24 @@ let boxC = document.getElementById("c");
 boxC.addEventListener('mousedown', handleDown);
 boxC.addEventListener('touchstart', handleDown);
 
-let boxE = document.getElementById("e");
-boxE.addEventListener('mousedown', handleDown);
-boxE.addEventListener('touchstart', handleDown);
+//let boxE = document.getElementById("e");
+//boxE.addEventListener('mousedown', handleDown);
+//boxE.addEventListener('touchstart', handleDown);
 
-window.addEventListener('mouseup', handleUp);
+boxC.addEventListener('mouseup', handleUp);
+$(boxC).bind('touchend',handleUp);
+
+
 window.addEventListener('mousemove', handleMove);
+$(window).bind('touchmove',handleMove);
 
-window.addEventListener('touchend', handleUp);
-window.addEventListener('touchmove', handleMove);
+
+//window.addEventListener('touchend', handleUp);
+//window.addEventListener('touchmove', handleMove);
+
+
+//$(boxC).on('move',handleMove);
+
 
  }
 
