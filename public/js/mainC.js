@@ -126,6 +126,7 @@ requestAnimationFrame(go);
 /* function to be triggered for move */
 let handleMove = function (event)
 {
+  console.log(event.target.id);
 event.preventDefault();
 if(onBox ==true)
 {
@@ -133,7 +134,8 @@ if(onBox ==true)
 
   // who is moving??
   let theElement = document.getElementById(event.target.id);
-  //console.log(theElement);
+  //if(event.target.id ==="testDragger"){
+  console.log(theElement);
   // calculate difference between previous mouseX and current mouseX pos
   let diffX = event.pageX-previousX;
   // calculate difference between previous mouseY and current mouseY pos
@@ -148,6 +150,7 @@ if(onBox ==true)
 // set the new left/top to the old+diff...
  theElement.style.left = ((rect.left+diffX)+"px");
  theElement.style.top = ((rect.top+diffY)+"px");
+//}
 }
 
 };
@@ -160,10 +163,13 @@ boxDrag.addEventListener('touchstart', handleDown);
 
 
 
-boxDrag.addEventListener('mouseup', handleUp);
-boxDrag.addEventListener('touchend', handleUp);
-//window.addEventListener('mousemove', handleMove);
+window.addEventListener('mouseup', handleUp);
+window.addEventListener('touchend', handleUp);
+
+//boxDrag.addEventListener('mousemove', handleMove);
 $(boxDrag).on('move',handleMove);
+
+//boxDrag.addEventListener("touchmove", handleMove, false);
 
 
 
