@@ -1,7 +1,7 @@
 window.onload = function(){
 console.log("we have launched client script");
 //let client = io.connect('https://test-cart351.herokuapp.com:5000');
-//let client = io();
+let client = io();
 let shapesAddedToDrawingBoard = [];
 
   let diffVector =null;
@@ -14,7 +14,8 @@ let onBox = false;
 /* function to be triggered when mouse is down */
 let handleDown = function (event)
 {
-event.preventDefault();
+ event.preventDefault();
+  event.stopPropagation();
 //if we are down & have not been down then update the prevX,Y vars
 // otherwise they will contain mouse positions from a while back
 if(onBox ==false) {
