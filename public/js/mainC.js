@@ -18,8 +18,8 @@ event.preventDefault();
 //if we are down & have not been down then update the prevX,Y vars
 // otherwise they will contain mouse positions from a while back
 if(onBox ==false) {
-  previousX = event.pageX;
-  previousY = event.pageY;
+  previousX = event.clientX;
+  previousY = event.clientY;
 }
 console.log("down");
 //make boolean true
@@ -126,23 +126,23 @@ requestAnimationFrame(go);
 /* function to be triggered for move */
 let handleMove = function (event)
 {
-  console.log(event.target.id);
+
 event.preventDefault();
 if(onBox ==true)
 {
   console.log("move");
 
   // who is moving??
-  let theElement = document.getElementById(event.target.id);
+  let theElement = document.getElementById("testDragger");
   //if(event.target.id ==="testDragger"){
   console.log(theElement);
   // calculate difference between previous mouseX and current mouseX pos
-  let diffX = event.pageX-previousX;
+  let diffX = event.clientX-previousX;
   // calculate difference between previous mouseY and current mouseY pos
-  let diffY =  event.pageY-previousY;
+  let diffY =  event.clientY-previousY;
   //store in previous the current mouse pos
-  previousX = event.pageX;
-  previousY = event.pageY;
+  previousX = event.clientX;
+  previousY = event.clientY;
   // set the element's new position:
 /*https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect*/
  let rect = theElement.getBoundingClientRect();
@@ -166,8 +166,8 @@ boxDrag.addEventListener('touchstart', handleDown);
 window.addEventListener('mouseup', handleUp);
 window.addEventListener('touchend', handleUp);
 
-//boxDrag.addEventListener('mousemove', handleMove);
-$(boxDrag).on('move',handleMove);
+window.addEventListener('mousemove', handleMove);
+//$(boxDrag).on('move',handleMove);
 
 //boxDrag.addEventListener("touchmove", handleMove, false);
 
