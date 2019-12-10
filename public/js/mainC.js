@@ -55,7 +55,7 @@ let shapePos = new p5.Vector(xPos,yPos);
  diffVector = p5.Vector.sub(centerCirclePos,shapePos);
  diffVector.normalize();
  diffVector.mult(2.0);
-//requestAnimationFrame(go);
+requestAnimationFrame(go);
 
  // we will now move the object in that direction ...
 
@@ -109,13 +109,13 @@ let shapePos = new p5.Vector(xPos,yPos);
 
  shapePos.add(diffVector);
 
- if(shapePos.x<0 || shapePos.x>500){
-   diffVector.x*=-1;
- }
-
- if(shapePos.y<0 || shapePos.y>500){
-   diffVector.y*=-1;
- }
+ // if(shapePos.x<0 || shapePos.x>500){
+ //   diffVector.x*=-1;
+ // }
+ //
+ // if(shapePos.y<0 || shapePos.y>500){
+ //   diffVector.y*=-1;
+ // }
  ///console.log(shapePos)
 
  let newPosX = shapePos.x.toString()+"px";
@@ -125,6 +125,8 @@ let shapePos = new p5.Vector(xPos,yPos);
 
 requestAnimationFrame(go);
 }
+
+
 /* function to be triggered for move */
 let handleMove = function (event)
 {
