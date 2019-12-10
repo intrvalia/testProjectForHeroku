@@ -54,7 +54,7 @@ let yPos = parseInt(y.substr(0,y.length-2));
 let shapePos = new p5.Vector(xPos,yPos);
  diffVector = p5.Vector.sub(centerCirclePos,shapePos);
  diffVector.normalize();
- diffVector.mult(2.0);
+ diffVector.mult(10.0);
 requestAnimationFrame(go);
 
  // we will now move the object in that direction ...
