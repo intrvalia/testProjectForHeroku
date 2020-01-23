@@ -35,6 +35,10 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
 
+app.get('/cam', function(req, res) {
+    res.sendFile(__dirname + '/public/index-camera.html');
+});
+
 // declare io which mounts to our httpServer object (runs ontop ... )
 let io = require('socket.io')(httpServer);
 // for the client...

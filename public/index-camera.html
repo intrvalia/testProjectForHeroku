@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Test Node with sockets and camera</title>
+
+        <!-- The stylesheets -->
+        <link rel="stylesheet" href="css/style.css" />
+      <script src="js/p5.min.js" > </script>
+        <script src="/socket.io/socket.io.js"></script>
+
+         <script src="js/jquery-3.4.1.js" > </script>
+         <!-- <script src = "js/jquery.event.move.js" ></script> -->
+        <script src="js/mainD.js" > </script>
+
+    </head>
+
+    <body>
+      <h1>Access Camera Example</h1>
+      <main>
+        <!-- set video to hidden - we only  want it as a temp container for streaming  -->
+      <video id="video"  autoplay="autoplay" controls="true" hidden></video>
+      <canvas id="testCanvas" width =640 height=240></canvas>
+      <canvas id="testCanvasMan" width =640 height=240></canvas>
+    </main>
+
+  </body>
+</html>
